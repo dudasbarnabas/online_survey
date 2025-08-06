@@ -5,21 +5,15 @@
   <title>Internet Use Survey</title>
   <script src="https://unpkg.com/survey-core@1.9.122/survey.core.min.js"></script>
   <link href="https://unpkg.com/survey-core@1.9.122/modern.min.css" rel="stylesheet" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 2rem;
-      background: #f7f7f7;
-    }
-  </style>
 </head>
 <body>
   <div id="surveyContainer"></div>
 
   <script>
-    // Set the theme
+    // Apply modern theme
     Survey.StylesManager.applyTheme("modern");
 
+    // Define the survey
     const surveyJSON = {
       title: "Internet Use Survey",
       pages: [
@@ -32,13 +26,16 @@
       ]
     };
 
+    // Create the survey
     const survey = new Survey.Model(surveyJSON);
 
+    // Handle completion
     survey.onComplete.add(function(sender) {
-      console.log(sender.data);
-      alert("Thank you! Your response has been logged.");
+      console.log("Survey results:", sender.data);
+      alert("Thank you for your response!");
     });
 
+    // Render it
     survey.render("surveyContainer");
   </script>
 </body>
