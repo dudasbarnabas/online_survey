@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <title>Internet Use Survey</title>
-  <script src="https://unpkg.com/survey-vanilla@1.9.122/survey.vanilla.min.js"></script>
+  <!-- Load jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Load SurveyJS (jQuery version) -->
+  <script src="https://unpkg.com/survey-jquery@1.9.122/survey.jquery.min.js"></script>
   <link href="https://unpkg.com/survey-core@1.9.122/modern.min.css" rel="stylesheet" />
   <style>
     body {
@@ -31,13 +34,13 @@
       ]
     };
 
-    const survey = new Survey.Model(surveyJSON);
+    const survey = new Survey.Survey(surveyJSON);
     survey.onComplete.add(function(sender) {
       console.log("Survey results:", sender.data);
       alert("Thank you for your response!");
     });
 
-    Survey.SurveyNG.render("surveyContainer", { model: survey });
+    survey.render("surveyContainer");
   </script>
 </body>
 </html>
