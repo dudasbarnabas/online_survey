@@ -1,46 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Internet Use Survey</title>
-  <!-- Load jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <!-- Load SurveyJS (jQuery version) -->
-  <script src="https://unpkg.com/survey-jquery@1.9.122/survey.jquery.min.js"></script>
-  <link href="https://unpkg.com/survey-core@1.9.122/modern.min.css" rel="stylesheet" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 2rem;
-      background: #f0f0f0;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>My Minimal GitHub Site</title>
 </head>
 <body>
-  <div id="surveyContainer"></div>
-
-  <script>
-    Survey.StylesManager.applyTheme("modern");
-
-    const surveyJSON = {
-      title: "Internet Use Survey",
-      pages: [
-        {
-          elements: [
-            { type: "text", name: "age", title: "Your age:" },
-            { type: "checkbox", name: "platforms", title: "Which platforms do you use?", choices: ["Instagram", "TikTok", "YouTube", "Facebook"] }
-          ]
-        }
-      ]
-    };
-
-    const survey = new Survey.Survey(surveyJSON);
-    survey.onComplete.add(function(sender) {
-      console.log("Survey results:", sender.data);
-      alert("Thank you for your response!");
-    });
-
-    survey.render("surveyContainer");
-  </script>
+  <h1>Hello, GitHub Pages! 👋</h1>
+  <p>This is a minimal working HTML site hosted with GitHub Pages.</p>
 </body>
 </html>
