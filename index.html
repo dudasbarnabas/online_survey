@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://unpkg.com/survey-jquery@1.9.122/survey.jquery.min.js"></script>
+  <link href="https://unpkg.com/survey-core/defaultV2.min.css" rel="stylesheet"/>
+</head>
+<body>
+  <div id="surveyContainer"></div>
+  <script>
+    const surveyJSON = {
+  "title": "Internet Use Survey",
+  "pages": [
+    {
+      "elements": [
+        {
+          "type": "text",
+          "name": "age",
+          "title": "Your age:"
+        },
+        {
+          "type": "checkbox",
+          "name": "platforms",
+          "title": "Which platforms do you use?",
+          "choices": ["Instagram", "TikTok", "YouTube", "Facebook"]
+        }
+      ]
+    }
+  ]
+};  // paste your JSON here
+
+    const survey = new Survey.Survey(surveyJSON);
+
+    survey.onComplete.add(function(sender) {
+      // Placeholder for data export
+      console.log(sender.data); // or send to server
+    });
+
+    survey.render("surveyContainer");
+  </script>
+</body>
+</html>
