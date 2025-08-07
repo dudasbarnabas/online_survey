@@ -18,6 +18,16 @@ const surveyJson = {
         name: "third",
         title: "Enter something:",
         type: "text"
+    }, {
+          type: "rating",
+          name: "nps_score",
+          title: "On a scale of zero to ten, how likely are you to recommend our product to a friend or colleague?",
+          isRequired: true,
+          rateCount: 11,
+          rateMin: 0,
+          rateMax: 10,
+          minRateDescription: "(Most unlikely)",
+          maxRateDescription: "(Most likely)"
     }
 ]
 };
