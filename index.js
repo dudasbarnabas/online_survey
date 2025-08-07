@@ -15,7 +15,9 @@ const surveyJson = {
 
 const survey = new Survey.Model(surveyJson);
 
-// ✅ This line renders the survey inside the div
 document.addEventListener("DOMContentLoaded", function () {
+  console.log("✅ DOM is loaded");
+  const container = document.getElementById("surveyContainer");
+  console.log("🔍 container:", container);
   survey.render("surveyContainer");
 });
