@@ -1,28 +1,25 @@
 const surveyJson = {
-    elements: [{
-        name: "FirstName",
-        title: "Enter your first name:",
-        type: "text"
-    }, {
-        name: "LastName",
-        title: "Enter your last name:",
-        type: "text"
-    }]
+  title: "NPS Survey Question",
+  logoHeight: "60px",
+  completedHtml: "<h3>Thank you for your feedback</h3>",
+  pages: [
+    {
+      name: "page1",
+      elements: [
+        {
+          type: "text",
+          name: "question1"
+        }
+      ]
+    }
+  ],
+  headerView: "advanced"
 };
 
+// Create Survey model
 const survey = new Survey.Model(surveyJson);
 
-survey.onComplete.add(function (sender) {
-  const results = sender.data;
-
-  // Example 1: Log results to the console
-  console.log("Survey results:", results);
-
-  // Example 2: Display on screen (optional)
-  document.getElementById("surveyContainer").innerHTML =
-    `<h3>Thanks, ${results.FirstName} ${results.LastName}!</h3>`;
-});
-
+// Render when page loads
 document.addEventListener("DOMContentLoaded", function () {
   survey.render("surveyContainer");
 });
