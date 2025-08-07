@@ -13,11 +13,14 @@ const surveyJson = {
   ]
 };
 
-const survey = new Survey.Model(surveyJson);
-
 document.addEventListener("DOMContentLoaded", function () {
   console.log("✅ DOM is loaded");
+
   const container = document.getElementById("surveyContainer");
   console.log("🔍 container:", container);
-  survey.render("surveyContainer");
+
+  const model = new Survey.Model(surveyJson);
+  const surveyUI = new Survey.Survey(model); // ✅ use the UI wrapper
+
+  surveyUI.render(container); // ✅ pass DOM element
 });
