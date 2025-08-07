@@ -12,6 +12,9 @@ const surveyJson = {
 
 const survey = new Survey.Model(surveyJson);
 
+
+survey.onComplete.add(function (sender) {
+  const results = sender.data;
   // Example 1: Log results to the console
   console.log("Survey results:", results);
 
