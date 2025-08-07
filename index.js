@@ -7,15 +7,18 @@ const surveyJson = {
         name: "LastName",
         title: "Enter your last name:",
         type: "text"
-    },
-    {
+    }, {
           type: "image",
           name: "question2",
           imageLink: "img/CT1.png",
           imageFit: "cover",
           imageHeight: "auto",
           imageWidth: "100%"
-        }
+    }, {
+        name: "third",
+        title: "Enter something:",
+        type: "text"
+    }
 ]
 };
 
