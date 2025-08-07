@@ -13,7 +13,7 @@ const surveyJson = {
           imageLink: "img/CT1.png",
           imageFit: "cover",
           imageHeight: "auto",
-          imageWidth: "100%"
+          imageWidth: "70%"
     }, {
         name: "third",
         title: "Enter something:",
