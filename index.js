@@ -24,4 +24,4 @@ survey.onComplete.add(function (sender) {
 
 // document.addEventListener("DOMContentLoaded", function() {
 //     survey.render(document.getElementById("surveyContainer"));
-// });
+});
