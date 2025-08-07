@@ -12,9 +12,9 @@ const surveyJson = {
 
 const survey = new Survey.Model(surveyJson);
 
-
 survey.onComplete.add(function (sender) {
   const results = sender.data;
+
   // Example 1: Log results to the console
   console.log("Survey results:", results);
 
@@ -23,6 +23,6 @@ survey.onComplete.add(function (sender) {
     `<h3>Thanks, ${results.FirstName} ${results.LastName}!</h3>`;
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    survey.render(document.getElementById("surveyContainer"));
+document.addEventListener("DOMContentLoaded", function () {
+  survey.render("surveyContainer");
 });
