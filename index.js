@@ -12,6 +12,13 @@ const surveyJson = {
 
 const survey = new Survey.Model(surveyJson);
 
-document.addEventListener("DOMContentLoaded", function() {
-    survey.render(document.getElementById("surveyContainer"));
-});
+  // Example 1: Log results to the console
+  console.log("Survey results:", results);
+
+  // Example 2: Display on screen (optional)
+  document.getElementById("surveyContainer").innerHTML =
+    `<h3>Thanks, ${results.FirstName} ${results.LastName}!</h3>`;
+
+// document.addEventListener("DOMContentLoaded", function() {
+//     survey.render(document.getElementById("surveyContainer"));
+// });
