@@ -1,25 +1,21 @@
 const surveyJson = {
-  title: "NPS Survey Question",
-  logoHeight: "60px",
-  completedHtml: "<h3>Thank you for your feedback</h3>",
-  pages: [
+  elements: [
     {
-      name: "page1",
-      elements: [
-        {
-          type: "text",
-          name: "question1"
-        }
-      ]
+      name: "FirstName",
+      title: "Enter your first name:",
+      type: "text"
+    },
+    {
+      name: "LastName",
+      title: "Enter your last name:",
+      type: "text"
     }
-  ],
-  headerView: "advanced"
+  ]
 };
 
-// Create Survey model
 const survey = new Survey.Model(surveyJson);
 
-// Render when page loads
+// ✅ This line renders the survey inside the div
 document.addEventListener("DOMContentLoaded", function () {
   survey.render("surveyContainer");
 });
