@@ -21,7 +21,8 @@ survey.onComplete.add(function (sender) {
   // Example 2: Display on screen (optional)
   document.getElementById("surveyContainer").innerHTML =
     `<h3>Thanks, ${results.FirstName} ${results.LastName}!</h3>`;
+});
 
-// document.addEventListener("DOMContentLoaded", function() {
-//     survey.render(document.getElementById("surveyContainer"));
+document.addEventListener("DOMContentLoaded", function() {
+    survey.render(document.getElementById("surveyContainer"));
 });
