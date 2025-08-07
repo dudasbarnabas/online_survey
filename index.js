@@ -7,7 +7,16 @@ const surveyJson = {
         name: "LastName",
         title: "Enter your last name:",
         type: "text"
-    }]
+    },
+    {
+          "type": "image",
+          "name": "question2",
+          "imageLink": "img/CT1.png",
+          "imageFit": "cover",
+          "imageHeight": "auto",
+          "imageWidth": "100%"
+        }
+]
 };
 
 const survey = new Survey.Model(surveyJson);
