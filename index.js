@@ -9,12 +9,12 @@ const surveyJson = {
         type: "text"
     },
     {
-          "type": "image",
-          "name": "question2",
-          "imageLink": "img/CT1.png",
-          "imageFit": "cover",
-          "imageHeight": "auto",
-          "imageWidth": "100%"
+          type: "image",
+          name: "question2",
+          imageLink: "img/CT1.png",
+          imageFit: "cover",
+          imageHeight: "auto",
+          imageWidth: "100%"
         }
 ]
 };
