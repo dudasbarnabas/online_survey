@@ -15,12 +15,15 @@ const surveyJson = {
 
 document.addEventListener("DOMContentLoaded", function () {
   console.log("✅ DOM is loaded");
-
   const container = document.getElementById("surveyContainer");
   console.log("🔍 container:", container);
 
+  // ✅ Create the model
   const model = new Survey.Model(surveyJson);
-  const surveyUI = new Survey.Survey(model); // ✅ use the UI wrapper
 
-  surveyUI.render(container); // ✅ pass DOM element
+  // ✅ Wrap in Survey.Survey UI component
+  const surveyUI = new Survey.Survey(model);
+
+  // ✅ Render into the container
+  surveyUI.render(container);
 });
