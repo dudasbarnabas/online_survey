@@ -1,29 +1,24 @@
 const surveyJson = {
-  elements: [
-    {
-      name: "FirstName",
-      title: "Enter your first name:",
-      type: "text"
-    },
-    {
-      name: "LastName",
-      title: "Enter your last name:",
-      type: "text"
-    }
-  ]
+    elements: [{
+        name: "FirstName",
+        title: "Enter your first name:",
+        type: "text"
+    }, {
+        name: "LastName",
+        title: "Enter your last name:",
+        type: "text"
+    }]
 };
 
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("✅ DOM is loaded");
-  const container = document.getElementById("surveyContainer");
-  console.log("🔍 container:", container);
+const survey = new Survey.Model(surveyJson);
 
-  // ✅ Create the model
-  const model = new Survey.Model(surveyJson);
+function alertResults (sender) {
+    const results = JSON.stringify(sender.data);
+    alert(results);
+}
 
-  // ✅ Wrap in Survey.Survey UI component
-  const surveyUI = new Survey.Survey(model);
+survey.onComplete.add(alertResults);
 
-  // ✅ Render into the container
-  surveyUI.render(container);
+document.addEventListener("DOMContentLoaded", function() {
+    survey.render(document.getElementById("surveyContainer"));
 });
