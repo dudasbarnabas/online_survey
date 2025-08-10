@@ -15,7 +15,7 @@ const surveyJson = {
     //       imageHeight: "contain",
     //       imageWidth: "50%",
     //       imageAlign: "center"
-    // }, {
+    }, {
         name: "third",
         title: "Enter something:",
         type: "text"
