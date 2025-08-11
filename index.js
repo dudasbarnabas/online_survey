@@ -35,6 +35,27 @@ const surveyJson = {
 
 const survey = new Survey.Model(surveyJson);
 
+  // 🔁 Send results to Google Apps Script
+  model.onComplete.add(function (sender) {
+    const payload = {
+      ...sender.data,
+      _submittedAt: new Date().toISOString(), // extra metadata, optional
+    };
+
+    fetch("YOUR_WEB_APP_URL_HERE", {
+      method: "POST",
+      headers: {
+        // use text/plain to avoid CORS preflight
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(payload)
+    }).then(() => {
+      console.log("✅ Sent to Google Sheet");
+    }).catch(err => {
+      console.error("❌ Failed to send:", err);
+    });
+  });
+
 function alertResults (sender) {
     const results = JSON.stringify(sender.data);
     alert(results);
