@@ -1,68 +1,44 @@
-const surveyJson = {
-    elements: [{
-        name: "FirstName",
-        title: "Enter your first name:",
-        type: "text"
-    }, {
-        name: "LastName",
-        title: "Enter your last name:",
-        type: "text"
-    // }, {
-    //       type: "image",
-    //       name: "question2",
-    //       imageLink: "img/CT1.png",
-    //       imageFit: "cover",
-    //       imageHeight: "contain",
-    //       imageWidth: "50%",
-    //       imageAlign: "center"
-    }, {
-        name: "third",
-        title: "Enter something:",
-        type: "text"
-    }, {
-          type: "rating",
-          name: "nps_score",
-          title: "On a scale of zero to ten, how likely are you to recommend our product to a friend or colleague?",
-          isRequired: true,
-          rateCount: 11,
-          rateMin: 0,
-          rateMax: 10,
-          minRateDescription: "(Most unlikely)",
-          maxRateDescription: "(Most likely)"
-    }
-]
-};
+document.addEventListener("DOMContentLoaded", function () {
+  // (Optional) nicer mobile theme
+  Survey.StylesManager.applyTheme("modern");
 
-const survey = new Survey.Model(surveyJson);
+  const surveyJson = {
+    pages: [
+      {
+        name: "page1",
+        elements: [
+          { name: "FirstName", title: "Enter your first name:", type: "text" },
+          { name: "LastName",  title: "Enter your last name:",  type: "text" },
+          { type: "image", name: "question2", imageLink: "img/CT1.png", imageFit: "contain", imageWidth: "100%" }
+        ]
+      }
+    ]
+  };
 
-// 🔁 Send results to Google Apps Script
-model.onComplete.add(function (sender) {
-const payload = {
-    ...sender.data,
-    _submittedAt: new Date().toISOString(), // extra metadata, optional
-};
+  const model = new Survey.Model(surveyJson);
 
-fetch("https://script.google.com/macros/s/AKfycbxEjc7hIE1SEpMWdUBo2JHWGxyiA-wtGbt0HQgpG7TXQsdNje1wmhG22MEWHh5i-eCeDw/exec", {
-    method: "POST",
-    headers: {
-    // use text/plain to avoid CORS preflight
-    "Content-Type": "text/plain;charset=utf-8"
-    },
-    body: JSON.stringify(payload)
-}).then(() => {
-    console.log("✅ Sent to Google Sheet");
-}).catch(err => {
-    console.error("❌ Failed to send:", err);
-});
-});
+  // 🔁 Send results to Google Apps Script
+  model.onComplete.add(function (sender) {
+    const payload = {
+      ...sender.data,
+      _submittedAt: new Date().toISOString(), // extra metadata, optional
+    };
 
-// function alertResults (sender) {
-//     const results = JSON.stringify(sender.data);
-//     alert(results);
-// }
+    fetch("YOUR_WEB_APP_URL_HERE", {
+      method: "POST",
+      headers: {
+        // use text/plain to avoid CORS preflight
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(payload)
+    }).then(() => {
+      console.log("✅ Sent to Google Sheet");
+    }).catch(err => {
+      console.error("❌ Failed to send:", err);
+    });
+  });
 
-// survey.onComplete.add(alertResults);
-
-document.addEventListener("DOMContentLoaded", function() {
-    survey.render(document.getElementById("surveyContainer"));
+  // Render
+  const surveyUI = new Survey.Survey(model);
+  surveyUI.render(document.getElementById("surveyContainer"));
 });
