@@ -1,5 +1,3 @@
-const SHEETS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxEjc7hIE1SEpMWdUBo2JHWGxyiA-wtGbt0HQgpG7TXQsdNje1wmhG22MEWHh5i-eCeDw/exec"; // ← put your endpoint here
-
 const surveyJson = {
     elements: [{
         name: "FirstName",
@@ -31,27 +29,15 @@ const surveyJson = {
           rateMax: 10,
           minRateDescription: "(Most unlikely)",
           maxRateDescription: "(Most likely)"
-    }]
+    }
+]
 };
 
 const survey = new Survey.Model(surveyJson);
 
-function alertResults(sender) {
-    const payload = { timestamp: new Date().toISOString(), ...sender.data };
-
-    // If your endpoint doesn't have CORS enabled yet, temporarily add:  // mode: "no-cors"
-    fetch(SHEETS_WEB_APP_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-    })
-    .then(() => {
-        alert("Thanks! Your response was saved ✅");
-    })
-    .catch((err) => {
-        console.error(err);
-        alert("Hmm, couldn't save due to a network error. Please try again 🙏");
-    });
+function alertResults (sender) {
+    const results = JSON.stringify(sender.data);
+    alert(results);
 }
 
 survey.onComplete.add(alertResults);
@@ -59,4 +45,3 @@ survey.onComplete.add(alertResults);
 document.addEventListener("DOMContentLoaded", function() {
     survey.render(document.getElementById("surveyContainer"));
 });
-
