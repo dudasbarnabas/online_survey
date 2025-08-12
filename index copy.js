@@ -11,7 +11,7 @@ pages: [
     elements: [
     {
         "type": "expression",
-        "name": "Kedves Kitöltő! \n A PTE ÁOK Magatartástudományi Intézet Kognitív Idegtudományi Tanszékének vizsgálatán vesz részt. "
+        "name": "Kedves Kitöltő! \n\nA PTE ÁOK Magatartástudományi Intézet Kognitív Idegtudományi Tanszékének vizsgálatán vesz részt. \nA kérdőív kitöltésével kutatásunkat segíti, melyben az okostelefonok és a közösségi média használat emberi magatartásra gyakorolt hatásait vizsgáljuk. "
     }
     ]}, {
     name: "page1",
