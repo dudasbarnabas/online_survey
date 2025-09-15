@@ -56,7 +56,7 @@ pages.push({
   name: "intro",
   elements: [{
         "type": "expression",
-         "name": "Kedves Kitöltő! \n\nA PTE ÁOK Magatartástudományi Intézet Kognitív Idegtudományi Tanszékének vizsgálatán vesz részt. \nA kérdőív kitöltésével kutatásunkat segíti, melyben az okostelefonok és a közösségi média használat emberi magatartásra gyakorolt hatásait vizsgáljuk. \nA kitöltés anonim, az eredményeket a kutatásunk során használt ingeranyag összeállításában fogjuk felhasználni. \nEzt követően különböző képeket mutatunk be. A bemutatott képeket kérjük értékelje a valencia (mennyire kellemes vagy kellemetlen az adott kép), arousal (mennyire intenzív érzelmeket vált ki az adott kép) és realisztikusság (mennyire találja realisztikusnak az adott képet) mentén egy-egy kilencfokú skálán, ahol:  \n\nValencia: \n1=kellemetlen/negatív  \n5=semleges  \n9=kellemes/pozitív  \n\nArousal:  \n1=nyugodt/békés  \n5=semleges  \n9=izgatott/feszült  \n\nRealisztikusság  \n1= Egyáltalán nem reális  \n9= Reális  \n\nSegítségét hálásan köszönjük!"
+         "name": "Kedves Résztvevő! \n\nA kérdőívben különböző képeket mutatunk be. A bemutatott képeket kérjük értékelje a valencia (mennyire kellemes vagy kellemetlen az adott kép), arousal (mennyire intenzív érzelmeket vált ki az adott kép) és realisztikusság (mennyire találja realisztikusnak az adott képet) mentén egy-egy kilencfokú skálán, ahol:  \n\nValencia: \n1=kellemetlen/negatív  \n5=semleges  \n9=kellemes/pozitív  \n\nArousal:  \n1=nyugodt/békés  \n5=semleges  \n9=izgatott/feszült  \n\nRealisztikusság  \n1= Egyáltalán nem reális  \n9= Reális  \n\nHa bármi kérdése lenne kérem keresse a vizsgálatvezetőt!"
   }]
 });
 
