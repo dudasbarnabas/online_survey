@@ -12,7 +12,7 @@ const makePage = (label, imgPrefix, idx) => ({
     {
       type: "image",
       name: `${label}${idx}_img`,
-      imageLink: `img/${imgPrefix}${idx}.png`,
+      imageLink: `../img/${imgPrefix}${idx}.png`,
       imageFit: "cover",
       imageHeight: "contain", // keep as you had it
       imageWidth: "100%",
@@ -173,7 +173,7 @@ for (let i = 1; i <= 18; i++) {
 const surveyJson = {
 title: "Ingeranyag validáció",
 description: "༼ つ ◕_◕ ༽つ A (*)-al jelölt mezők kitöltése kötelező. A kérdőív beküldése a (Complete) gombbal történik, a böngésző, a válasz sikeres mentéséről visszajelez. (´▽`ʃ♡ƪ)",
-logo: "favicon.png",
+logo: "../favicon.png",
 logoHeight: "60px",
 pages: pages
 };
