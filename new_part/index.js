@@ -30,24 +30,25 @@ const pages = [
         {
           "type": "radiogroup",
           "name": "path",
-          "title": "Kérem jelölje kitöltötte-e már a kérdőívet",
+          "title": "Kérem jelölje kitöltötte-e már ezt a kérdőívet",
+          "description": "A kérdőív a személyes adatok, médiafogyasztási szokások és időpontegyeztető oldalakból áll.",
           "isRequired": true,
           "choices": [
             {
               "value": "full",
-              "text": "Még nem töltöttem ki"
+              "text": "Mind a három blokkot kitöltöm most."
             },
             {
               "value": "woq",
-              "text": "Még nem töltöttem ki, most nincs időm a kérdőívre"
+              "text": "Csak megadom az adataimat és időpontot egyeztetek, a médiafogyasztási szokásokra vonatkozó kérdőívet még nem töltöm ki."
             },
             {
               "value": "jq",
-              "text": "Már kitöltöttem, a kérdőívcsomagot szeretném kitölteni"
+              "text": "Már megadtam az adataimat, egyeztettem időpontot. Csak a médiafogyasztási médiafogyasztási szokásokra vonatkozó kérdőívet tölteném ki."
             },
             {
               "value": "date",
-              "text": "Már kitöltöttem, időpontot egyeztetnék"
+              "text": "Már mindent kitöltöttem, új időpontot szeretnék egyeztetni."
             }
           ]
         }
@@ -78,7 +79,7 @@ const pages = [
         {
           "type": "text",
           "name": "age",
-          "title": "Kérem, adja meg életkorát",
+          "title": "Kérem, adja meg életkorát (években)",
           "isRequired": true,
           "inputType": "number"
         },
@@ -501,9 +502,14 @@ pages: pages,
 triggers: [
     {
       type: "skip",
-      expression: "{fem} = true or {preg} = true or {psych} = true or {brain} = true or {hand} <> 'jobb'",
+      expression: "{fem} = true or {preg} = true or {psych} = true or {brain} = true",
       gotoName: "sajnalom"
-    }
+    },
+    {
+      type: "skip",
+      expression: "{hand} <> 'jobb'",
+      gotoName: "sajnalom"
+    },
   ],
 };
 
