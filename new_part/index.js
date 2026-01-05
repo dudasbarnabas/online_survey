@@ -44,7 +44,7 @@ const pages = [
             },
             {
               "value": "jq",
-              "text": "Már megadtam az adataimat, egyeztettem időpontot. Csak a médiafogyasztási médiafogyasztási szokásokra vonatkozó kérdőívet tölteném ki."
+              "text": "Már megadtam az adataimat, egyeztettem időpontot. Csak a médiafogyasztási szokásokra vonatkozó kérdőívet tölteném ki."
             },
             {
               "value": "date",
