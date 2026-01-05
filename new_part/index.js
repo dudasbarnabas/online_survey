@@ -418,14 +418,14 @@ const pages = [
               "type": "panel",
               "name": "book_panel",
               "visibleIf": "{path} = 'full' or {path} = 'date' or {path} = 'woq'",
-              "title": "Miért érdemes több időpontot bejelölni?",
+              "title": "Mit tegyek, ha nem jó egyik időpont se? Miért érdemes több időpontot bejelölni?",
               "description": "FAQ",
               "state": "collapsed",
               "elements": [
                 {
                   "type": "html",
                   "name": "faq_book",
-                  "html": "Igyekszünk mindenki számára időpontot biztosítani. Amennyiben van több meghirdetett üres időpontunk, a helyek kiosztásánál előnyt élveznek azok, akik több dátumot is megfelelőnek jelöltek, így jelentősen hozzásegítettek minket a kutatási idő hézagmentes feltöltéséhez."
+                  "html": "Ha előre láthatóan egyik időpont akkor időpont megjelölése nélkül is érdemes beküldened az ívet. Így, ha új időpontjaink lesznek, akkor e-mailben tudunk értesíteni. Igyekszünk mindenki számára időpontot biztosítani. Amennyiben van több meghirdetett üres időpontunk, a helyek kiosztásánál előnyt élveznek azok, akik több dátumot is megfelelőnek jelöltek, így jelentősen hozzásegítettek minket a kutatási idő hézagmentes feltöltéséhez."
                 }
               ]
             },
@@ -434,7 +434,7 @@ const pages = [
               "name": "date_check",
               "title": "Melyik időpont(ok)ban tudna résztvenni a kutatásban?",
               "choices": [
-                "2026.01.15. 11:30"
+                "2026.01.12. 13:30"
               ]
             },
             {
