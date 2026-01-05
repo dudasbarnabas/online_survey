@@ -100,7 +100,9 @@ const pages = [
           "type": "boolean",
           "name": "volt_mr",
           "title": "Korábban már vettem részt MR mérésen",
-          "isRequired": true
+          "isRequired": true,
+          "labelTrue": "Igen",
+          "labelFalse": "Nem"
         },
         {
           "type": "panel",
@@ -111,8 +113,8 @@ const pages = [
           "elements": [
             {
               "type": "html",
-              "name": "question2",
-              "html": "Read more: <a href=\"https://dudasbarnabas.github.io/online_survey/faq\" target=\"_blank\" rel=\"noopener noreferrer\">FAQ</a>"
+              "name": "faq_femek",
+              "html": "Az MRI nagyon erős mágneses teret használ, ami a ferromágneses (mágnes által erősen vonzott) fémeket megmozdíthatja vagy elfordíthatja, és ez veszélyes lehet (például sérülést okozhat). Emellett bizonyos fémek a rádióhullámok miatt felmelegedhetnek, ami szintén kockázat. Ezért kell mindig előre jelezni, ha van a testedben például implantátum, klipsz, fémrögzítés, pacemaker, vagy bármi hasonló. <a href=\"https://dudasbarnabas.github.io/online_survey/faq\" target=\"_blank\" rel=\"noopener noreferrer\">FAQ</a>"
             }
           ]
         },
@@ -359,7 +361,7 @@ const pages = [
                 {
                   "type": "html",
                   "name": "faq_contact",
-                  "html": ""
+                  "html": "Ahhoz, hogy időpontot tudjunk egyeztetni, szükségünk van a telefonszámára és e-mail-címére. Ezeket az adatokat kizárólag a jelen kutatási ciklus ideje alatt tároljuk, más célra nem használjuk fel, és harmadik fél részére nem adjuk át. Az időpont-egyeztetéssel kapcsolatos kommunikációt ezeken a csatornákon bonyolítjuk."
                 }
               ]
             },
@@ -374,7 +376,7 @@ const pages = [
                 {
                   "type": "html",
                   "name": "faq_email",
-                  "html": ""
+                  "html": "Ahhoz, hogy a korábbi kitöltésével összekapcsolhassuk a most megadott információkat szügségünk van ugyanarra az e-mail címre."
                 }
               ]
             },
@@ -471,7 +473,7 @@ const pages = [
     },
     {
       "name": "sorry",
-      "visibleIf": "{fem} = true or {preg} = true or {psych} = true or {brain} = true",
+      "visibleIf": "{fem} = true or {preg} = true or {psych} = true or {brain} = true or {hand} <> 'jobb",
       "elements": [
         {
           "type": "panel",
@@ -480,7 +482,7 @@ const pages = [
             {
               "type": "html",
               "name": "sajnalom",
-              "visibleIf": "{fem} = true or {preg} = true or {psych} = true or {brain} = true",
+              "visibleIf": "{fem} = true or {preg} = true or {psych} = true or {brain} = true or {hand} <> 'jobb'",
               "html": "Tájékoztatjuk, hogy a megadott válaszok alapján jelenleg nem felel meg a vizsgálat MRI-biztonsági és/vagy kutatási részvételi feltételeinek, ezért a kutatásban való részvétele nem lehetséges.\nA kritériumok célja a résztvevők biztonságának garantálása és a vizsgálati adatok megbízhatóságának biztosítása. Köszönjük az érdeklődését és az együttműködését."
             }
           ]
@@ -498,7 +500,7 @@ pages: pages,
 triggers: [
     {
       type: "skip",
-      expression: "{fem} = true or {preg} = true or {psych} = true or {brain} = true",
+      expression: "{fem} = true or {preg} = true or {psych} = true or {brain} = true or {hand} <> 'jobb'",
       gotoName: "sajnalom"
     }
   ],
