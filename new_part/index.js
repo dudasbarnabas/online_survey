@@ -451,7 +451,8 @@ const pages = [
                   "html": "Ezen kérdőív kitöltése nem jelenti az időpont lefoglalását. Az esetleges részvételével és annak tényleges időpontjával kapcsolatban telefonon és/vagy emailben keresni fogjuk.<br/><br/>" +
                   "A kutatás helyszíne 7623, Pécs Rét utca 2. Pécsi Diagnosztikai Központ épülete. <br/><br/>" +
                   "Az MR szempontjából fontos, hogy 1. kényelmes ruhában jöjjön; 2. az ékszereit, testékszereit lehetőség szerint vegye ki még otthon; 3. a mérés előtti este igyekezzen sokat aludni, és lehetőség szerint kerülje a túlzott alkoholfogyasztást. <br/><br/>" +
-                  "Adminisztrációs okoknál fogva TESCO vásárlási utalványokban tudjuk a tiszteletdíjat biztosítani. <br/><br/>"
+                  "Adminisztrációs okoknál fogva TESCO vásárlási utalványokban tudjuk a tiszteletdíjat biztosítani. <br/><br/>" +
+                  "Ha kérdése van vegye fel velünk a kapcsolatot e-mail-ben. <a href=\"mailto:fatiguestudy20@gmail.com\">fatiguestudy20@gmail.com</a>"
                 }
               ]
             },
