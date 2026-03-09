@@ -48,6 +48,42 @@ pages.push({
   ]
 });
 
+pages.push({
+    name: "demography",
+    elements: [ 
+{
+          "type": "checkbox",
+          "name": "Éreztem már úgy hogy az internethasználatom mértéke befolyásolta a...",
+          "choices": [
+            "koncentrációm",
+            "figyelmem",
+            "memóriám",
+            {
+              "value": "kognitív",
+              "text": "kognitív funkcióm (gondolkodási képességem)"
+            },
+            {
+              "value": "frissességem / fáradtságom",
+              "text": ""
+            },
+            {
+              "value": "szorongásom mértékét",
+              "text": ""
+            },
+            {
+              "value": "hangulatom / érzelmi nyitottságom",
+              "text": ""
+            },
+            {
+              "value": "problémamegoldó képességem",
+              "text": ""
+            }
+          ],
+          "showOtherItem": true,
+          "otherText": "mást"
+        },
+  ]
+});
 
 const surveyJson = {
 title: "Cholnoky fórum 03.12.",
