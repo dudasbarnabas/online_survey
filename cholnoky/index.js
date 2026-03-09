@@ -110,3 +110,6 @@ const survey = new Survey.Model(surveyJson);
 //   postPartial(sender, "complete");
 // });
 
+document.addEventListener("DOMContentLoaded", function() {
+    survey.render(document.getElementById("surveyContainer"));
+});
