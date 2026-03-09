@@ -59,56 +59,56 @@ pages: pages
 
 const survey = new Survey.Model(surveyJson);
 
-// // 1) Create a stable response id once per respondent
-// function getOrCreateResponseId() {
-//   const key = "survey_response_id";
-//   let id = localStorage.getItem(key);
-//   if (!id) {
-//     id = (crypto?.randomUUID?.() ?? (Date.now() + "-" + Math.random().toString(16).slice(2)));
-//     localStorage.setItem(key, id);
-//   }
-//   return id;
-// }
+// 1) Create a stable response id once per respondent
+function getOrCreateResponseId() {
+  const key = "survey_response_id";
+  let id = localStorage.getItem(key);
+  if (!id) {
+    id = (crypto?.randomUUID?.() ?? (Date.now() + "-" + Math.random().toString(16).slice(2)));
+    localStorage.setItem(key, id);
+  }
+  return id;
+}
 
-// const RESPONSE_ID = getOrCreateResponseId();
+const RESPONSE_ID = getOrCreateResponseId();
 
-// // 2) Your Apps Script Web App URL
-// const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbz33snvjsULA_fA6QseNSYtVsOVjAFSV99xoYXxAsD6aWhrchYvCeK1SdvmpBSkbdZuBw/exec";
+// 2) Your Apps Script Web App URL
+const ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbz33snvjsULA_fA6QseNSYtVsOVjAFSV99xoYXxAsD6aWhrchYvCeK1SdvmpBSkbdZuBw/exec";
 
-// // 3) Helper to POST partial data
-// async function postPartial(survey, reason) {
-//   const payload = {
-//     responseId: RESPONSE_ID,
-//     reason, // "page-change" | "complete" | etc.
-//     pageNo: survey.currentPageNo,
-//     pageName: survey.currentPage?.name ?? null,
-//     isComplete: survey.isCompleted,
-//     savedAt: new Date().toISOString(),
-//     data: survey.data
-//   };
+// 3) Helper to POST partial data
+async function postPartial(survey, reason) {
+  const payload = {
+    responseId: RESPONSE_ID,
+    reason, // "page-change" | "complete" | etc.
+    pageNo: survey.currentPageNo,
+    pageName: survey.currentPage?.name ?? null,
+    isComplete: survey.isCompleted,
+    savedAt: new Date().toISOString(),
+    data: survey.data
+  };
 
-//   try {
-//     await fetch(ENDPOINT_URL, {
-//       method: "POST",
-//       mode: "no-cors", // common for Apps Script; response will be opaque
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify(payload)
-//     });
-//   } catch (e) {
-//     // Optional: store offline queue if you want reliability
-//     console.warn("Partial save failed:", e);
-//   }
-// }
+  try {
+    await fetch(ENDPOINT_URL, {
+      method: "POST",
+      mode: "no-cors", // common for Apps Script; response will be opaque
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+  } catch (e) {
+    // Optional: store offline queue if you want reliability
+    console.warn("Partial save failed:", e);
+  }
+}
 
-// // Fire when they move between pages
-// survey.onCurrentPageChanged.add((sender, options) => {
-//   postPartial(sender, "page-change");
-// });
+// Fire when they move between pages
+survey.onCurrentPageChanged.add((sender, options) => {
+  postPartial(sender, "page-change");
+});
 
-// // Also send on completion
-// survey.onComplete.add((sender) => {
-//   postPartial(sender, "complete");
-// });
+// Also send on completion
+survey.onComplete.add((sender) => {
+  postPartial(sender, "complete");
+});
 
 document.addEventListener("DOMContentLoaded", function() {
     survey.render(document.getElementById("surveyContainer"));
