@@ -16,72 +16,106 @@ pages.push({
   ]
 });
 
-pages.push({
-    name: "demography",
-    elements: [ 
-    {
-        type: "text",
-        name: "kor",
-        title: "Kérem adja meg életkorát!",
-        isRequired: true,
-        inputType: "number",
-        min: 1,
-        max: 100
-    }, {
-        type: "radiogroup",
-        name: "nem",
-        title: "Kérem adja meg nemét",
-        choices: [
-          {
-            value: "1",
-            text: "Férfi"
-          },
-          {
-            value: "2",
-            text: "Nő"
-          }
-        ],
-        showOtherItem: true,
-        otherText: "Más (szabadon kitölthető)"
-    }
+// pages.push({
+//     name: "demography",
+//     elements: [ 
+//     {
+//         type: "text",
+//         name: "kor",
+//         title: "Kérem adja meg életkorát!",
+//         isRequired: true,
+//         inputType: "number",
+//         min: 1,
+//         max: 100
+//     }, {
+//         type: "radiogroup",
+//         name: "nem",
+//         title: "Kérem adja meg nemét",
+//         choices: [
+//           {
+//             value: "1",
+//             text: "Férfi"
+//           },
+//           {
+//             value: "2",
+//             text: "Nő"
+//           }
+//         ],
+//         showOtherItem: true,
+//         otherText: "Más (szabadon kitölthető)"
+//     }
   
+//   ]
+// });
+
+pages.push({
+    name: "diagnostic",
+    elements: [ 
+      {
+          type: "checkbox",
+          name: "Az internetfüggőség legfontosabb 5 tünete:",
+          maxSelectedChoices: 5,
+          choices: [
+            "Kontrollvesztés az internethasználat felett",
+            "Az internethasználat abbahagyásának nehézsége",
+            "A tervezettnél hosszabb online időtöltés",
+            "Sikertelen próbálkozások a használat csökkentésére",
+            "Állandó késztetés az internethasználatra",
+            "Feszültség vagy ingerlékenység, ha nincs internetelérés",
+            "Az internet használata rossz hangulat csökkentésére",
+            "Az alvás háttérbe szorulása az internethasználat miatt",
+            "A tanulás vagy munka elhanyagolása",
+            "A családi vagy baráti kapcsolatok romlása",
+            "A hobbik és egyéb tevékenységek háttérbe szorulása",
+            "Titkolózás az online töltött időről",
+            "A koncentráció romlása",
+            "Akkor is folytatott internethasználat, ha az már problémát okoz",
+            "Egyre több online idő igénye ugyanahhoz az elégedettségérzéshez",
+            "Nyugtalanság internet nélkül",
+            "A napi rutin felborulása",
+            "Gyakoribb halogatás az internethasználat miatt",
+            "Az offline tevékenységek iránti érdeklődés csökkenése",
+            "A felelősségek elhanyagolása az internet miatt"
+          ],
+      },
   ]
 });
 
+
 pages.push({
-    name: "demography",
+    name: "negative",
     elements: [ 
-{
-          "type": "checkbox",
-          "name": "Éreztem már úgy hogy az internethasználatom mértéke befolyásolta a...",
-          "choices": [
+      {
+          type: "checkbox",
+          name: "Éreztem már úgy hogy az internethasználatom mértéke befolyásolta a...",
+          choices: [
             "koncentrációm",
             "figyelmem",
             "memóriám",
             {
-              "value": "kognitív",
-              "text": "kognitív funkcióm (gondolkodási képességem)"
+              value: "kognitív",
+              text: "kognitív funkcióm (gondolkodási képességem)"
             },
             {
-              "value": "frissességem / fáradtságom",
-              "text": ""
+              value: "frissességem / fáradtságom",
+              text: ""
             },
             {
-              "value": "szorongásom mértékét",
-              "text": ""
+              value: "szorongásom mértékét",
+              text: ""
             },
             {
-              "value": "hangulatom / érzelmi nyitottságom",
-              "text": ""
+              value: "hangulatom / érzelmi nyitottságom",
+              text: ""
             },
             {
-              "value": "problémamegoldó képességem",
-              "text": ""
+              value: "problémamegoldó képességem",
+              text: ""
             }
           ],
           "showOtherItem": true,
           "otherText": "mást"
-        },
+      },
   ]
 });
 
