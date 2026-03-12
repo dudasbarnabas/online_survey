@@ -6,15 +6,12 @@ pages.push({
   name: "intro",
   elements: [{
         "type": "expression",
-         "name": "Kedves Résztvevő! \n\n"
-  },{
-        type: "text",
-        name: "id",
-        title: "Kérem adja meg az anonimizált kódját!",
-        isRequired: true
-    }
+        "name": "Kedves Résztvevő! \n\n A kérdések itt kezdődnek. Ha kitöltötte a kérdéseket az adott oldalon kérem lépjen a következő oldalra, hogy a válaszok mentésre kerüljenek."
+  }
   ]
 });
+
+
 
 // pages.push({
 //     name: "demography",
@@ -47,6 +44,45 @@ pages.push({
   
 //   ]
 // });
+pages.push({
+    name: "",
+    elements: [
+      {
+        "type": "expression",
+        "name": "Mennyi időt tölt az alábbi online felületek használatával?"
+      }, 
+      {
+          type: "text",
+          name: "facebook",
+          title: "Egy héten hány órát tölt átlagosan a Facebook-on?",
+          inputType: "number"
+      },
+      {
+          type: "text",
+          name: "insta",
+          title: "Egy héten hány órát tölt átlagosan a Instagram-on?",
+          inputType: "number"
+      },
+      {
+          type: "text",
+          name: "tiktok",
+          title: "Egy héten hány órát tölt átlagosan a TikTok-on?",
+          inputType: "number"
+      },
+      {
+          type: "text",
+          name: "youtube",
+          title: "Egy héten hány órát tölt átlagosan a YouTube-on?",
+          inputType: "number"
+      },
+      {
+          type: "text",
+          name: "twitter",
+          title: "Egy héten hány órát tölt átlagosan a X-en?",
+          inputType: "number"
+      },
+  ]
+});
 
 pages.push({
     name: "diagnostic",
@@ -118,6 +154,73 @@ pages.push({
       },
   ]
 });
+
+pages.push({
+    name: "szamterjedelem",
+    elements: [
+      {
+        "type": "expression",
+        "name": "Számterjedelem teszt. Jegyezze meg, és írja le a számot."
+      }, 
+      {
+          type: "text",
+          name: "1/1. szám"
+      },
+      {
+        type: "text",
+        name: "1/2. szám"
+      },
+      {
+        type: "text",
+        name: "1/3. szám"
+      },
+  ]
+});
+
+pages.push({
+    name: "forditottszam",
+    elements: [
+      {
+        "type": "expression",
+        "name": "Fordított számterjedelem teszt. Jegyezze meg, és írja le a számot VISSZAFELÉ"
+      }, 
+      {
+          type: "text",
+          name: "2/1. szám"
+      },
+      {
+        type: "text",
+        name: "2/2. szám"
+      },
+      {
+        type: "text",
+        name: "2/3. szám"
+      },
+  ]
+});
+
+pages.push({
+    name: "addenbrook2",
+    elements: [
+      {
+        "type": "expression",
+        "name": "Emlékszik még arra a három dologra, amit kértem, hogy ismételjen utánam?"
+      }, 
+      {
+          type: "text",
+          name: "1."
+      },
+      {
+        type: "text",
+        name: "2."
+      },
+      {
+        type: "text",
+        name: "3."
+      },
+  ]
+});
+
 
 const surveyJson = {
 title: "Cholnoky fórum 03.12.",
