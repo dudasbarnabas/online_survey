@@ -1,0 +1,28 @@
+:root { color-scheme: light; font-family: system-ui, sans-serif; color: #17232c; background: #fff; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #fff; height: 100vh; height: 100dvh; overflow: hidden; }
+#experiment { height: 100vh; height: 100dvh; width: 100%; background: #fff; overflow-y: auto; overscroll-behavior: contain; }
+.jspsych-display-element { font: 17px/1.5 system-ui, sans-serif; }
+.jspsych-content-wrapper { flex: 1 0 auto; min-height: 100%; }
+.jspsych-content { width: min(100%, 580px); padding: 24px 20px; }
+h1 { font-size: clamp(32px, 8vw, 48px); letter-spacing: -.04em; line-height: 1.1; margin: 14px 0 20px; }
+.eyebrow { font-size: 12px; letter-spacing: .15em; text-transform: uppercase; color: #596978; font-weight: 700; }
+.muted { font-size: 14px; color: #596978; }
+.preview-circle { width: 72px; height: 72px; background: #1264f5; border-radius: 50%; margin: 22px auto; }
+.jspsych-btn { width: 100%; min-height: 54px; border: 1px solid #1264f5; border-radius: 12px; background: #1264f5; color: white; font: 650 17px system-ui, sans-serif; padding: 14px 20px; touch-action: manipulation; }
+.jspsych-btn:hover { background: #084ccd; }
+.jspsych-btn:focus-visible { outline: 3px solid #17232c; outline-offset: 3px; }
+#jspsych-html-button-response-btngroup { width: 100%; margin: 20px auto; }
+.jspsych-content.pvt-active { width: 100%; max-width: none; height: 100vh; height: 100dvh; padding: 0; }
+.pvt-surface { position: relative; height: 100%; width: 100%; background: white; touch-action: none; user-select: none; -webkit-user-select: none; cursor: pointer; }
+.pvt-label { position: absolute; top: max(20px, env(safe-area-inset-top)); left: 16px; right: 16px; font-size: 12px; letter-spacing: .1em; color: #667481; text-transform: uppercase; }
+.blue-circle { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: clamp(90px, 23vmin, 140px); height: clamp(90px, 23vmin, 140px); border-radius: 50%; background: #1264f5; }
+[hidden] { display: none !important; }
+.pvt-message { position: absolute; top: 50%; left: 20px; right: 20px; transform: translateY(-50%); font-size: 28px; font-weight: 700; color: #263a4a; }
+.pvt-message small { display: block; font-size: 15px; font-weight: 400; margin-top: 10px; }
+.pvt-message button { display: block; width: min(100%, 280px); margin: 22px auto 0; }
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 22px 0; }
+.stat { border: 1px solid #dbe3ee; padding: 18px 8px; border-radius: 12px; }
+.stat strong { display: block; font-size: 28px; }
+.stat span { font-size: 13px; color: #596978; }
+@media (max-height: 500px) { .jspsych-content { padding: 16px 20px; } }

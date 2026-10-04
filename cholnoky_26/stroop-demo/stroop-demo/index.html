@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="A short, touch-friendly Stroop demonstration. Responses are not saved or uploaded.">
+  <title>Colour / Word — Stroop demo</title>
+  <link rel="stylesheet" href="vendor/jspsych.css">
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #17232c; background: #f6f5f0; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .jspsych-display-element { font-family: system-ui, sans-serif; font-size: 17px; line-height: 1.6; }
+    .jspsych-content { width: min(100%, 620px); padding: 24px 20px; }
+    h1 { font-size: clamp(32px, 8vw, 52px); line-height: 1.08; letter-spacing: -.04em; margin: 18px 0; }
+    h2 { line-height: 1.2; }
+    .eyebrow { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: #486356; font-weight: 750; }
+    .muted { color: #53616a; font-size: 14px; }
+    .example { background: white; border: 1px solid #d9ded8; border-radius: 16px; padding: 18px; margin: 24px 0; }
+    .word { font-weight: 850; font-size: clamp(46px, 13vw, 76px); letter-spacing: .02em; line-height: 1; }
+    .stage { min-height: 190px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+    #jspsych-html-button-response-btngroup { gap: 12px; width: 100%; margin: 20px auto; }
+    .jspsych-btn { width: 100%; min-height: 60px; padding: 14px 18px; border: 1px solid #bdc8c0; border-radius: 12px; background: #fff; color: #17232c; font: inherit; font-weight: 650; touch-action: manipulation; }
+    .jspsych-btn:hover { background: #eaf0e9; }
+    .jspsych-btn:focus-visible { outline: 3px solid #285e48; outline-offset: 3px; }
+    .jspsych-btn:disabled { opacity: .5; }
+    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+    .stat { background: #fff; border: 1px solid #d9ded8; padding: 18px 8px; border-radius: 14px; }
+    .stat strong { display: block; font-size: 27px; }
+    .stat span { font-size: 13px; color: #53616a; }
+    .feedback { font-size: 25px; font-weight: 700; }
+    @media (max-height: 500px) { .stage { min-height: 110px; gap: 20px; } .jspsych-content { padding: 12px 20px; } }
+  </style>
+</head>
+<body>
+  <main id="experiment"><p style="padding:24px">Loading the Stroop demo…</p></main>
+  <noscript>This demo needs JavaScript enabled in your browser.</noscript>
+  <script src="vendor/jspsych.js"></script>
+  <script src="vendor/html-button-response.js"></script>
+  <script>
+  'use strict';
+  if (typeof initJsPsych === 'undefined' || typeof jsPsychHtmlButtonResponse === 'undefined') {
+    document.getElementById('experiment').textContent = 'The demo could not load. Upload the vendor folder alongside index.html, then refresh.';
+  } else {
+    // All state is temporary. No network calls, cookies, browser storage or exports.
+    const colours = [
+      { name: 'Red', hex: '#c92d34' }, { name: 'Blue', hex: '#245bc6' },
+      { name: 'Green', hex: '#167647' }, { name: 'Purple', hex: '#8741ae' }
+    ];
+    const jsPsych = initJsPsych({ display_element: 'experiment' });
+    let practiceFeedback = '';
+    let score = { correct: 0, matching: { n: 0, sum: 0 }, conflicting: { n: 0, sum: 0 } };
+    const screen = (stimulus, choices, extra = {}) => ({
+      type: jsPsychHtmlButtonResponse,
+      stimulus, choices, record_data: false,
+      button_layout: 'grid', grid_rows: 1,
+      ...extra
+    });
+    const timeline = [screen(`
+      <div class="eyebrow">A tiny experiment in attention</div>
+      <h1>Colour / Word</h1>
+      <p>Tap the <strong>ink colour</strong>.<br>Ignore what the word says.</p>
+      <div class="example"><span class="word" style="color:#245bc6">RED</span><p class="muted">For this word, tap <strong>Blue</strong>.</p></div>
+      <p>4 practice trials. Then 24 scored trials.<br>Be as quick and accurate as you can.</p>
+      <p class="muted">An educational demo. Your responses are used only for your on-screen score and are never saved or uploaded.</p>
+    `, ['Try the practice'])];
+
+    function addTrial(ink, word, number, practice) {
+      const condition = ink === word ? 'matching' : 'conflicting';
+      timeline.push(screen(`
+        <div class="stage"><div class="eyebrow">${practice ? 'Practice' : 'Trial'} ${number} / ${practice ? 4 : 24}</div>
+        <div class="word" style="color:${colours[ink].hex}">${colours[word].name.toUpperCase()}</div></div>
+      `, colours.map(c => c.name), {
+        // jsPsych must retain this trial in memory for on_finish to receive data.
+        // Nothing writes this in-memory collection to disk or a server.
+        record_data: true,
+        grid_rows: 2, grid_columns: 2,
+        prompt: '<p class="muted">Choose the ink colour.</p>',
+        on_finish: data => {
+          const correct = data.response === ink;
+          if (practice) {
+            practiceFeedback = correct ? 'Correct' : `The ink was ${colours[ink].name.toLowerCase()}.`;
+          } else if (correct) {
+            score.correct++;
+            score[condition].n++;
+            score[condition].sum += data.rt;
+          }
+        }
+      }));
+      // A brief gap prevents a double tap from answering the following trial.
+      timeline.push(screen(
+        () => practice ? `<div class="stage feedback">${practiceFeedback}</div>` : '<div class="stage" aria-hidden="true">+</div>',
+        [], { trial_duration: practice ? 850 : 300 }
+      ));
+    }
+    [[0,0],[1,0],[2,3],[3,3]].forEach(([ink,word],i) => addTrial(ink,word,i+1,true));
+    timeline.push(screen('<div class="eyebrow">Ready?</div><h1>Trust the colour.</h1><p>The next 24 trials count towards your score.<br>There is no feedback until the end.</p>', ['Start the demo']));
+    // 12 matching + 12 conflicting; both words and ink colours balanced.
+    const trials = [];
+    colours.forEach((_,ink) => {
+      for (let repeat=0; repeat<3; repeat++) trials.push({ink,word:ink});
+      colours.forEach((_,word) => { if (ink !== word) trials.push({ink,word}); });
+    });
+    jsPsych.randomization.shuffle(trials).forEach((t,i) => addTrial(t.ink,t.word,i+1,false));
+    timeline.push(screen(() => {
+      const mean = s => s.n ? Math.round(s.sum/s.n) : null;
+      const matching = mean(score.matching), conflicting = mean(score.conflicting);
+      let effect = 'A comparison needs at least one correct answer in each condition.';
+      if (matching !== null && conflicting !== null) {
+        const difference = conflicting - matching;
+        effect = difference > 0
+          ? `You were ${difference} ms slower on conflicting words.`
+          : difference < 0 ? `You were ${Math.abs(difference)} ms faster on conflicting words this time.`
+          : 'Your rounded average times were equal in the two conditions.';
+      }
+      const totalCorrect = score.matching.n + score.conflicting.n;
+      const overall = totalCorrect ? Math.round((score.matching.sum+score.conflicting.sum)/totalCorrect)+' ms' : '—';
+      return `<div class="eyebrow">Demo complete</div><h1>Your attention,<br>in action.</h1>
+        <div class="stats">
+          <div class="stat"><strong>${score.correct} / 24</strong><span>Correct answers</span></div>
+          <div class="stat"><strong>${overall}</strong><span>Mean correct response time</span></div>
+          <div class="stat"><strong>${matching === null ? '—' : matching+' ms'}</strong><span>Matching · ${score.matching.n}/12 correct</span></div>
+          <div class="stat"><strong>${conflicting === null ? '—' : conflicting+' ms'}</strong><span>Conflicting · ${score.conflicting.n}/12 correct</span></div>
+        </div><p><strong>${effect}</strong></p>
+        <p>Reading the word can interfere with naming its ink colour. That interference is the idea behind the Stroop effect.</p>
+        <p class="muted">This short demo may not show the usual pattern every time. It is not a diagnostic assessment; device and touch timing also affect the results.</p>
+        <p class="muted">Nothing has been saved or uploaded. Refreshing the page resets the demo.</p>`;
+    }, ['Play again'], { on_finish: () => { score = null; window.location.reload(); } }));
+    jsPsych.run(timeline);
+  }
+  </script>
+</body>
+</html>

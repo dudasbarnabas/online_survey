@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="referrer" content="no-referrer">
+  <title>One step / Two steps — N-back demo</title>
+  <link rel="stylesheet" href="vendor/jspsych.css">
+  <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+  <main id="experiment">
+    <div class="intro">
+      <div class="eyebrow">A tiny experiment in working memory</div>
+      <h1>Keep a letter<br>in mind.</h1>
+      <p>A stream of letters. One question:<br><strong>Does this letter match the one n steps back?</strong></p>
+      <div class="example">
+        <p><strong>1-back:</strong> compare with the previous letter.</p>
+        <div class="sequence">A <b>A</b></div>
+        <p class="muted">The second A is a match.</p>
+        <p><strong>2-back:</strong> compare with the letter two positions earlier.</p>
+        <div class="sequence">A B <b>A</b></div>
+        <p class="muted">The third letter matches the first.</p>
+      </div>
+      <p>6 practice decisions. Then 30 scored decisions.<br>Tap <strong>Match</strong> or <strong>No match</strong> for each.</p>
+      <div id="choice-buttons">
+        <button class="jspsych-btn" id="one-back">Try 1-back</button>
+        <button class="jspsych-btn" id="two-back">Try 2-back</button>
+      </div>
+      <p class="muted">An educational demo. Your responses stay temporarily in this browser and are never saved or uploaded.</p>
+      <p class="muted" id="load-error" role="alert"></p>
+    </div>
+  </main>
+  <noscript>This demo needs JavaScript enabled.</noscript>
+  <script src="vendor/jspsych.js"></script>
+  <script src="vendor/html-button-response.js"></script>
+  <script src="app.js?v=2"></script>
+</body>
+</html>

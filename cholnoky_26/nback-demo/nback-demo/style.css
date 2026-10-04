@@ -1,0 +1,62 @@
+
+    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #17232c; background: #f6f5f0; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .jspsych-display-element { font-family: system-ui, sans-serif; font-size: 17px; line-height: 1.6; }
+    .jspsych-content { width: min(100%, 620px); padding: 24px 20px; }
+    h1 { font-size: clamp(32px, 8vw, 52px); line-height: 1.08; letter-spacing: -.04em; margin: 18px 0; }
+    h2 { line-height: 1.2; }
+    .eyebrow { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: #486356; font-weight: 750; }
+    .muted { color: #53616a; font-size: 14px; }
+    .example { background: white; border: 1px solid #d9ded8; border-radius: 16px; padding: 18px; margin: 24px 0; }
+    .word { font-weight: 850; font-size: clamp(46px, 13vw, 76px); letter-spacing: .02em; line-height: 1; }
+    .stage { min-height: 190px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+    #jspsych-html-button-response-btngroup { gap: 12px; width: 100%; margin: 20px auto; }
+    .jspsych-btn { width: 100%; min-height: 60px; padding: 14px 18px; border: 1px solid #bdc8c0; border-radius: 12px; background: #fff; color: #17232c; font: inherit; font-weight: 650; touch-action: manipulation; }
+    .jspsych-btn:hover { background: #eaf0e9; }
+    .jspsych-btn:focus-visible { outline: 3px solid #285e48; outline-offset: 3px; }
+    .jspsych-btn:disabled { opacity: .5; }
+    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+    .stat { background: #fff; border: 1px solid #d9ded8; padding: 18px 8px; border-radius: 14px; }
+    .stat strong { display: block; font-size: 27px; }
+    .stat span { font-size: 13px; color: #53616a; }
+    .feedback { font-size: 25px; font-weight: 700; }
+    @media (max-height: 500px) { .stage { min-height: 110px; gap: 20px; } .jspsych-content { padding: 12px 20px; } }
+  
+.letter { font-size: clamp(76px, 22vw, 108px); font-weight: 800; line-height: 1; color: #285e48; }
+.sequence { font-size: 30px; word-spacing: 18px; font-weight: 700; }
+.sequence b { color: #285e48; text-decoration: underline; }
+#choice-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+#experiment > .intro { width: min(100%,620px); margin: 6vh auto; padding: 24px 20px; text-align: center; }
+
+/* The task replaces the landing page and occupies the visible viewport. */
+body.experiment-running { height: 100vh; height: 100dvh; overflow: hidden; }
+.experiment-running #experiment {
+  height: 100vh;
+  height: 100dvh;
+  width: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.experiment-running .jspsych-content-wrapper { flex: 1 0 auto; min-height: 100%; }
+.experiment-running .jspsych-content { padding: 16px max(16px, env(safe-area-inset-right)) 16px max(16px, env(safe-area-inset-left)); }
+.jspsych-content.active-task {
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: max(12px, env(safe-area-inset-top));
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+}
+.active-task .stage { min-height: 0; height: clamp(110px, 34dvh, 240px); gap: 16px; }
+.active-task .letter { font-size: clamp(48px, 18dvh, 100px); }
+.active-task #jspsych-html-button-response-btngroup { flex-shrink: 0; margin: 12px auto; gap: 12px; }
+.active-task .muted { margin: 6px 0; font-size: 13px; line-height: 1.4; }
+@media (max-height: 450px) {
+  .active-task .stage { height: 100px; gap: 6px; }
+  .active-task .letter { font-size: 48px; }
+  .active-task #jspsych-html-button-response-btngroup { margin: 8px auto; }
+  .active-task .jspsych-btn { min-height: 48px; padding: 8px 14px; }
+}
