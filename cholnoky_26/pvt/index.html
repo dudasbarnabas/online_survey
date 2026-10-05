@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width,
+             initial-scale=1,
+             maximum-scale=1,
+             user-scalable=no"
+  >
+
+  <title>PVT Demo</title>
+
+  <!-- jsPsych -->
+  <script src="https://unpkg.com/jspsych@8.3.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-button-response@2.1.0"></script>
+
+  <link
+    href="https://unpkg.com/jspsych@8.3.0/css/jspsych.css"
+    rel="stylesheet"
+  >
+
+  <style>
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overscroll-behavior: none;
+      touch-action: manipulation;
+      font-family: system-ui, sans-serif;
+      background: #111;
+      color: white;
+    }
+
+    #jspsych-target {
+      width: 100%;
+      height: 100%;
+    }
+
+    .pvt-screen {
+      position: fixed;
+      inset: 0;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      background: #fdfdfd;
+
+      user-select: none;
+      -webkit-user-select: none;
+
+      touch-action: none;
+    }
+
+    .pvt-target {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+
+      background: rgb(35, 101, 243);
+
+      opacity: 0;
+    }
+
+    .pvt-target.visible {
+      opacity: 1;
+    }
+
+    .pvt-feedback {
+      font-size: 3rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .start-box {
+      max-width: 500px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .start-box h1 {
+      font-size: 2.4rem;
+    }
+
+    .start-box p {
+      font-size: 1.3rem;
+      line-height: 1.5;
+    }
+
+    .jspsych-btn {
+      font-size: 1.4rem;
+      padding: 18px 32px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body></body>
+
+<script>
+
+/* ============================================================
+   CUSTOM PVT PLUGIN
+   ============================================================ */
+
+class PvtTrialPlugin {
+
+  constructor(jsPsych) {
+    this.jsPsych = jsPsych;
+  }
+
+  static info = {
+    name: "pvt-trial",
+    version: "1.0.0",
+    parameters: {},
+    data: {}
+  };
+
+
+  trial(display_element, trial) {
+
+    const MIN_WAIT = 2000;
+    const MAX_WAIT = 10000;
+
+    const wait =
+      MIN_WAIT +
+      Math.random() * (MAX_WAIT - MIN_WAIT);
+
+
+    display_element.innerHTML = `
+      <div class="pvt-screen">
+        <div class="pvt-target"></div>
+      </div>
+    `;
+
+
+    const screen =
+      display_element.querySelector(".pvt-screen");
+
+    const target =
+      display_element.querySelector(".pvt-target");
+
+
+    let stimulusOnset = null;
+    let stimulusShown = false;
+    let responded = false;
+
+
+    /* --------------------------------------------------------
+       Show stimulus
+       -------------------------------------------------------- */
+
+    this.jsPsych.pluginAPI.setTimeout(() => {
+
+      stimulusShown = true;
+
+      /*
+       requestAnimationFrame synchronizes this operation
+       with the browser's rendering cycle.
+      */
+
+      requestAnimationFrame(() => {
+
+        target.classList.add("visible");
+
+        /*
+         performance.now() gives us a high-resolution
+         monotonic browser timestamp.
+        */
+
+        stimulusOnset = performance.now();
+
+      });
+
+    }, wait);
+
+
+    /* --------------------------------------------------------
+       Handle touch / mouse / pen
+       -------------------------------------------------------- */
+
+    const handleResponse = (event) => {
+
+      event.preventDefault();
+
+      if (responded) {
+        return;
+      }
+
+
+      /* FALSE START */
+
+      if (!stimulusShown || stimulusOnset === null) {
+
+        responded = true;
+
+        screen.removeEventListener(
+          "pointerdown",
+          handleResponse
+        );
+
+        display_element.innerHTML = `
+          <div class="pvt-screen">
+            <div class="pvt-feedback">
+              Too early
+            </div>
+          </div>
+        `;
+
+        this.jsPsych.pluginAPI.setTimeout(() => {
+
+          this.jsPsych.finishTrial({
+            rt: null,
+            false_start: true,
+            foreperiod: wait
+          });
+
+        }, 600);
+
+        return;
+      }
+
+
+      /* VALID RESPONSE */
+
+      const responseTime = performance.now();
+
+      const rt =
+        responseTime - stimulusOnset;
+
+
+      responded = true;
+
+      screen.removeEventListener(
+        "pointerdown",
+        handleResponse
+      );
+
+
+      display_element.innerHTML = `
+        <div class="pvt-screen">
+          <div class="pvt-feedback">
+            ${Math.round(rt)} ms
+          </div>
+        </div>
+      `;
+
+
+      this.jsPsych.pluginAPI.setTimeout(() => {
+
+        this.jsPsych.finishTrial({
+          rt: rt,
+          false_start: false,
+          foreperiod: wait
+        });
+
+      }, 500);
+
+    };
+
+
+    /*
+     pointerdown fires at initial finger contact,
+     rather than waiting for a complete click.
+    */
+
+    screen.addEventListener(
+      "pointerdown",
+      handleResponse
+    );
+
+  }
+}
+
+
+/* ============================================================
+   INITIALIZE jsPSYCH
+   ============================================================ */
+
+const jsPsych = initJsPsych();
+
+
+/* ============================================================
+   INTRO
+   ============================================================ */
+
+const intro = {
+
+  type: jsPsychHtmlButtonResponse,
+
+  stimulus: `
+    <div class="start-box">
+
+      <h1>Reaction Time</h1>
+
+      <p>
+        Wait for the white circle.
+      </p>
+
+      <p>
+        As soon as it appears,
+        tap the screen as quickly as possible.
+      </p>
+
+      <p>
+        Don't tap early.
+      </p>
+
+    </div>
+  `,
+
+  choices: ["START"]
+
+};
+
+
+/* ============================================================
+   PVT TRIALS
+   ============================================================ */
+
+const trials = [];
+
+const N_TRIALS = 20;
+
+for (let i = 0; i < N_TRIALS; i++) {
+
+  trials.push({
+
+    type: PvtTrialPlugin,
+
+    data: {
+      task: "pvt",
+      trial_number: i + 1
+    }
+
+  });
+
+}
+
+
+/* ============================================================
+   RESULTS
+   ============================================================ */
+
+const results = {
+
+  type: jsPsychHtmlButtonResponse,
+
+  stimulus: function() {
+
+    const data =
+      jsPsych.data
+        .get()
+        .filter({ task: "pvt" });
+
+
+    const valid =
+      data
+        .filter({ false_start: false })
+        .select("rt")
+        .values;
+
+
+    const falseStarts =
+      data
+        .filter({ false_start: true })
+        .count();
+
+
+    const sorted = [...valid]
+      .sort((a, b) => a - b);
+
+
+    const mean =
+      valid.length
+        ? valid.reduce((a, b) => a + b, 0)
+            / valid.length
+        : 0;
+
+
+    const median =
+      sorted.length
+        ? sorted[Math.floor(sorted.length / 2)]
+        : 0;
+
+
+    const fastest =
+      sorted.length
+        ? sorted[0]
+        : 0;
+
+
+    const lapses =
+      valid.filter(rt => rt >= 500).length;
+
+
+    return `
+
+      <div class="start-box">
+
+        <h1>Results</h1>
+
+        <p>
+          Median RT:
+          <strong>${Math.round(median)} ms</strong>
+        </p>
+
+        <p>
+          Mean RT:
+          <strong>${Math.round(mean)} ms</strong>
+        </p>
+
+        <p>
+          Fastest:
+          <strong>${Math.round(fastest)} ms</strong>
+        </p>
+
+        <p>
+          Lapses ≥500 ms:
+          <strong>${lapses}</strong>
+        </p>
+
+        <p>
+          False starts:
+          <strong>${falseStarts}</strong>
+        </p>
+
+      </div>
+
+    `;
+
+  },
+
+  choices: ["RUN AGAIN"],
+
+  on_finish: () => {
+    window.location.reload();
+  }
+
+};
+
+
+/* ============================================================
+   RUN
+   ============================================================ */
+
+jsPsych.run([
+  intro,
+  ...trials,
+  results
+]);
+
+</script>
+
+</html>
